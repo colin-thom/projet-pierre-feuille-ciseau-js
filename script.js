@@ -1,11 +1,42 @@
 pierre = document.querySelector("#pierre");
 feuille = document.querySelector("#feuille");
 ciseaux = document.querySelector("#ciseaux");
+pointJoueur = document.querySelector("#pointsJoueur");
+pointComputer = document.querySelector("#pointsComputer");
+raz = document.querySelector("#raz");
 
 function getComputerChoice() {
     const tab = ['pierre', 'feuille', 'ciseaux'];
     return tab[Math.floor(Math.random() * 3)]
 }
+
+
+let score =
+ { 'joueur': 0,
+  'computer': 0}
+;
+console.log(localStorage.getItem('score'))
+
+
+if (localStorage.getItem('score') == ''){
+  score.joueur = 0;
+  score.computer = 0
+} else if(localStorage.getItem('score') != 'null'){
+  score = JSON.parse(localStorage.getItem('score')) 
+}  else {
+  score.joueur = 0;
+  score.computer = 0
+}
+console.log(score)
+
+pointJoueur.innerHTML = score.joueur;
+pointComputer.innerHTML = score.computer;
+
+raz.addEventListener("click", function(){
+  localStorage.setItem("score", '');
+  document.location.reload();
+})
+
 
 anime({
     targets: feuille,
@@ -117,7 +148,7 @@ pierre.addEventListener("click", function(){
       if(computerChoice == 'pierre'){
         let computerImage = document.createElement('img');
         computerImage.setAttribute("id", "computerPierre");
-        computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2755/2755524.svg?token=exp=1614675810~hmac=7d1b47d450a18ef94580ee21afd81216");
+        computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2755/2755524.svg?token=exp=1614760414~hmac=679c123483b3e17c879134e7d97f35ea");
         computerImage.setAttribute("alt", "imagecomputer");
         document.body.appendChild(computerImage);
         adv = document.querySelector("#computerPierre");
@@ -130,7 +161,7 @@ pierre.addEventListener("click", function(){
       } else if(computerChoice == 'feuille'){
         let computerImage = document.createElement('img');
         computerImage.setAttribute("id", "computerFeuille");
-        computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2165/2165693.svg?token=exp=1614675646~hmac=d7db601209a5cf55815e5fb249f58037");
+        computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2165/2165693.svg?token=exp=1614760389~hmac=73c399b3abcb545cdd06c1b737fe90cd");
         computerImage.setAttribute("alt", "imagecomputer");
         document.body.appendChild(computerImage);
         adv = document.querySelector("#computerFeuille");
@@ -139,11 +170,13 @@ pierre.addEventListener("click", function(){
         resultat.setAttribute("id", "resultat");
         resultat.innerHTML = "c'est perdu !"
         document.body.appendChild(resultat);
+        score.computer ++;
+        pointComputer.innerHTML = score.computer;
 
       } else {
         let computerImage = document.createElement('img');
         computerImage.setAttribute("id", "computerciseaux");
-        computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/3179/3179247.svg?token=exp=1614675897~hmac=453f9e5af136b7eaed0a04e8ce0eb093");
+        computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/3179/3179247.svg?token=exp=1614760440~hmac=89eb5df4ea9d6d193868094a02b24849");
         computerImage.setAttribute("alt", "imagecomputer");
         document.body.appendChild(computerImage);
         adv = document.querySelector("#computerciseaux");
@@ -152,6 +185,8 @@ pierre.addEventListener("click", function(){
         resultat.setAttribute("id", "resultat");
         resultat.innerHTML = "c'est gagné !"
         document.body.appendChild(resultat);
+        score.joueur ++;
+        pointJoueur.innerHTML = score.joueur;
       }
       anime({
         targets: adv,
@@ -180,6 +215,7 @@ pierre.addEventListener("click", function(){
           });
 
         rejouer.addEventListener("click", function(){
+          localStorage.setItem("score", JSON.stringify(score))
             document.location.reload();
         })
   })
@@ -233,7 +269,7 @@ feuille.addEventListener("click", function(){
           if(computerChoice == 'pierre'){
             let computerImage = document.createElement('img');
             computerImage.setAttribute("id", "computerPierre");
-            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2755/2755524.svg?token=exp=1614675810~hmac=7d1b47d450a18ef94580ee21afd81216");
+            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2755/2755524.svg?token=exp=1614760414~hmac=679c123483b3e17c879134e7d97f35ea");
             computerImage.setAttribute("alt", "imagecomputer");
             document.body.appendChild(computerImage);
             adv = document.querySelector("#computerPierre");
@@ -242,11 +278,13 @@ feuille.addEventListener("click", function(){
             resultat.setAttribute("id", "resultat");
             resultat.innerHTML = "c'est gagné !"
             document.body.appendChild(resultat);
+            score.joueur ++;
+            pointJoueur.innerHTML = score.joueur;
     
           } else if(computerChoice == 'feuille'){
             let computerImage = document.createElement('img');
             computerImage.setAttribute("id", "computerFeuille");
-            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2165/2165693.svg?token=exp=1614675646~hmac=d7db601209a5cf55815e5fb249f58037");
+            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2165/2165693.svg?token=exp=1614760389~hmac=73c399b3abcb545cdd06c1b737fe90cd");
             computerImage.setAttribute("alt", "imagecomputer");
             document.body.appendChild(computerImage);
             adv = document.querySelector("#computerFeuille");
@@ -259,7 +297,7 @@ feuille.addEventListener("click", function(){
           } else {
             let computerImage = document.createElement('img');
             computerImage.setAttribute("id", "computerciseaux");
-            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/3179/3179247.svg?token=exp=1614675897~hmac=453f9e5af136b7eaed0a04e8ce0eb093");
+            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/3179/3179247.svg?token=exp=1614760440~hmac=89eb5df4ea9d6d193868094a02b24849");
             computerImage.setAttribute("alt", "imagecomputer");
             document.body.appendChild(computerImage);
             adv = document.querySelector("#computerciseaux");
@@ -268,6 +306,8 @@ feuille.addEventListener("click", function(){
             resultat.setAttribute("id", "resultat");
             resultat.innerHTML = "c'est perdu !"
             document.body.appendChild(resultat);
+            score.computer ++;
+            pointComputer.innerHTML = score.computer;
           }
           anime({
             targets: adv,
@@ -296,6 +336,7 @@ feuille.addEventListener("click", function(){
               });
     
             rejouer.addEventListener("click", function(){
+              localStorage.setItem("score", JSON.stringify(score))
                 document.location.reload();
             })
       })
@@ -351,7 +392,7 @@ ciseaux.addEventListener("click", function(){
           if(computerChoice == 'pierre'){
             let computerImage = document.createElement('img');
             computerImage.setAttribute("id", "computerPierre");
-            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2755/2755524.svg?token=exp=1614675810~hmac=7d1b47d450a18ef94580ee21afd81216");
+            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2755/2755524.svg?token=exp=1614760414~hmac=679c123483b3e17c879134e7d97f35ea");
             computerImage.setAttribute("alt", "imagecomputer");
             document.body.appendChild(computerImage);
             adv = document.querySelector("#computerPierre");
@@ -360,11 +401,13 @@ ciseaux.addEventListener("click", function(){
             resultat.setAttribute("id", "resultat");
             resultat.innerHTML = "c'est perdu !"
             document.body.appendChild(resultat);
+            score.computer ++;
+            pointComputer.innerHTML = score.computer;
     
           } else if(computerChoice == 'feuille'){
             let computerImage = document.createElement('img');
             computerImage.setAttribute("id", "computerFeuille");
-            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2165/2165693.svg?token=exp=1614675646~hmac=d7db601209a5cf55815e5fb249f58037");
+            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/2165/2165693.svg?token=exp=1614760389~hmac=73c399b3abcb545cdd06c1b737fe90cd");
             computerImage.setAttribute("alt", "imagecomputer");
             document.body.appendChild(computerImage);
             adv = document.querySelector("#computerFeuille");
@@ -373,11 +416,13 @@ ciseaux.addEventListener("click", function(){
             resultat.setAttribute("id", "resultat");
             resultat.innerHTML = "c'est gagné !"
             document.body.appendChild(resultat);
+            score.joueur ++;
+            pointJoueur.innerHTML = score.joueur;
     
           } else {
             let computerImage = document.createElement('img');
             computerImage.setAttribute("id", "computerciseaux");
-            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/3179/3179247.svg?token=exp=1614675897~hmac=453f9e5af136b7eaed0a04e8ce0eb093");
+            computerImage.setAttribute("src", "https://www.flaticon.com/svg/vstatic/svg/3179/3179247.svg?token=exp=1614760440~hmac=89eb5df4ea9d6d193868094a02b24849");
             computerImage.setAttribute("alt", "imagecomputer");
             document.body.appendChild(computerImage);
             adv = document.querySelector("#computerciseaux");
@@ -414,6 +459,9 @@ ciseaux.addEventListener("click", function(){
               });
     
             rejouer.addEventListener("click", function(){
+              
+                localStorage.setItem("score", JSON.stringify(score))
+
                 document.location.reload();
             })
       })

@@ -43,7 +43,7 @@ img{
     top: 2000px;
     left: 1200px;
     background-color: #a01d1d; /* Green */
-    border-radius: 20%;
+    border-radius: 40%;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -52,5 +52,32 @@ img{
     font-size: 16px;
 }
 
+#raz{
+    position: absolute;
+    top: 700px;
+    left: 300px;
+    background-color: #a01d1d; /* Green */
+    border-radius: 40%;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
 
+#pointsJoueur{
+position: absolute;
+top:200px;
+left:100px;
+}
 
+#pointsComputer{
+position: absolute;
+top:200px;
+left:1700px;
+}
+
+p{
+    font-size: 100px;
+}
